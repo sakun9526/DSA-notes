@@ -771,3 +771,20 @@ binarySearch(arr, x, low, high)
             return binarySearch(arr, x, low, mid - 1)
 
 ```
+
+<br>
+
+## Complexity
+
+TC - Time complexity , SC - Space complexity
+
+
+
+| Algorithm         | TC - Worst Case  | TC - Average Case | TC - Best Case  | SC - Worst Case  |
+| ----------------- | ---------------- | ----------------- | --------------  | -----------------|
+| Bubble sort       | O(n<sup>2</sup>) | O(n<sup>2</sup>)  | O(n)            | O(1)             |
+| Selection sort    | O(n<sup>2</sup>) | O(n<sup>2</sup>)  | O(n<sup>2</sup>)| O(1)             | 
+| Insertion sort    | O(n<sup>2</sup>) | O(n<sup>2</sup>)  | O(n)            | O(1)             | 
+| Merge sort        | O(n log(n))      | O(n log(n))       | O(n log(n))     | O(n)             |
+| Quick sort        | O(n<sup>2</sup>) | O(n log(n))       | O(n log(n))     | O(n)             |  
+| Heap sort         | O(n log(n))      | O(n log(n))       | O(n log(n))     | O(1)             | 
