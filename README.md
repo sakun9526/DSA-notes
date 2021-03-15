@@ -689,6 +689,8 @@ Linear search is the simplest searching algorithm that searches for an element i
 
 <img src="Images/linear search gif.gif" alt="linear search">
 
+**Code**
+
 ```c++
 // Linear Search in C++
 
@@ -713,5 +715,59 @@ int main() {
 
   (result == -1) ? cout << "Element not found" : cout << "Element found at index: " << result;
 }
+
+```
+
+**Pseudocode**
+
+```markdown
+procedure linear_search (list, value)
+
+   for each item in the list
+      if match item == value
+         return the item's location
+      end if
+   end for
+
+end procedure
+
+```
+
+<br>
+
+### Binary Search
+
+Binary Search is a searching algorithm for finding an element's position in a sorted array.
+
+#### Iteration method
+
+``` markdown
+
+do until the pointers low and high meet each other.
+    mid = (low + high)/2
+    if (x == arr[mid])
+        return mid
+    else if (x > arr[mid]) // x is on the right side
+        low = mid + 1
+    else                       // x is on the left side
+        high = mid - 1
+
+```
+
+#### Recursive method
+
+``` markdown
+
+binarySearch(arr, x, low, high)
+    if low > high
+        return False 
+    else
+        mid = (low + high) / 2 
+        if x == arr[mid]
+            return mid
+        else if x < arr[mid]        // x is on the right side
+            return binarySearch(arr, x, mid + 1, high)
+        else                               // x is on the right side
+            return binarySearch(arr, x, low, mid - 1)
 
 ```
