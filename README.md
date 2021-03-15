@@ -326,6 +326,7 @@ Divide and conquer algorithms has 03 main steps
 
 ### Merge sort
 
+<img src="Images/merge sort gif.gif" alt="merge sort gif">
 <img src="Images/merge sort.JPG" alt="merge sort">
 
 **Code**
@@ -483,5 +484,131 @@ procedure merge( var a as array, var b as array )
    return c
 	
 end procedure
+
+```
+
+##### Advantages of merge sort
+
+1. With a good time complexity of O(n log n), merge sort is great !!!
+
+##### Disdavantages of merge sort
+
+1. Poor space complexity of O(n)
+2. Lots of overhead in copying data between arrays and making new arrays
+
+<br>
+
+### Quick sort
+
+<img src="Images/quick sort gif.gif" alt="quick sort">
+
+**Code**
+
+``` C++
+#include <iostream>
+using namespace std;
+
+
+void quickSort(int[], int, int);
+int partition(int[], int, int);
+void swap(int*, int*);
+
+
+int main(){
+	int arr[]={8, 7, 6, 5, 4, 3, 2, 1};
+	int length=sizeof(arr)/sizeof(arr[0]);
+	
+	
+	cout << "Unsorted Array : ";
+	for(int i=0; i<length; i++){
+		cout << arr[i] << " ";
+	}
+	cout << endl << endl;
+	
+	
+	quickSort(arr, 0, length-1);
+	
+	
+	cout << "Sorted Array : ";
+	for(int i=0; i<length; i++){
+		cout << arr[i] << " ";
+	}
+	cout << endl << endl;
+
+	return 0;
+}
+
+
+// calls partition() in every recursive step to bring the pivot to it's right position(sorted position)
+// divides the array into 2 subarrays around the sorted position of the pivot
+// and recursively calls quickSort() for both those sub arrays
+void quickSort(int arr[], int l, int r){
+	if(l<r){
+		int pivot=partition(arr, l, r);
+		
+		quickSort(arr, l, pivot-1); // quickSort() first half (before pivot)
+		quickSort(arr, pivot+1, r); // quickSort() second half (after pivot)
+	}
+}
+
+
+// last element of the array or the sub array is taken as the pivot
+// brings the privot to the right position of the array(sorts the pivot)
+// and returns the correct position(sorted position) of the pivot in the array
+int partition(int arr[], int l, int r){
+	int pivot=arr[r];
+	
+	int i=l-1;
+	for(int j=l; j<r; j++){
+		if(arr[j]<pivot){
+			i++;
+			swap(&arr[i], &arr[j]);
+		}
+	}
+	
+	swap(&arr[i+1], &arr[r]);
+	
+	return i+1;
+}
+
+
+// swaps two numbers using pointers
+void swap(int *num1, int *num2){
+	int temp=*num1;
+	*num1=*num2;
+	*num2=temp;
+}
+
+```
+
+**Pseudocode**
+
+``` markdown
+
+function partitionFunc(left, right, pivot)
+   leftPointer = left
+   rightPointer = right - 1
+
+   while True do
+      while A[++leftPointer] < pivot do
+         //do-nothing            
+      end while
+		
+      while rightPointer > 0 && A[--rightPointer] > pivot do
+         //do-nothing         
+      end while
+		
+      if leftPointer >= rightPointer
+         break
+      else                
+         swap leftPointer,rightPointer
+      end if
+		
+   end while 
+	
+   swap leftPointer,right
+   return leftPointer
+	
+end function
 
 ```
