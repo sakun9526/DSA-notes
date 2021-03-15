@@ -177,5 +177,13 @@ int main(){
 
 ```
 
+##### Advantages of bubble sort
 
+1. Requires less memory then other sorting techniques.
+2. Easy to code.
+
+##### Disdavantages of bubble sort
+
+1. Slow like a snail, time complexity is O(n2)
+2. The algorithm will be slowest when the array is sorted by in reverse
 
