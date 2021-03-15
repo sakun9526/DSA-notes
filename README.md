@@ -187,3 +187,59 @@ int main(){
 1. Slow like a snail, time complexity is O(n2)
 2. The algorithm will be slowest when the array is sorted by in reverse
 
+
+<br>
+
+### Selection sort
+
+Selection sort is an algorithm that selects the smallest element from an unsorted list in each iteration and places that element at the beginning of the unsorted list.
+
+<img src="Images/selection sort.JPG" alt="selection sort">
+
+```c++
+int main(){
+	int arr[]={8, 7, 6, 5, 4, 3, 2, 1};
+	
+	int length=sizeof(arr)/sizeof(arr[0]);
+
+	sortArray(arr, length);
+
+	return 0;
+}
+
+
+void sortArray(int arr[], int length){
+	// selection sort technique
+	int index, temp;
+	// index - index of temporary minumum value
+	// temp - temp variable used for swapping
+	for(int i=0; i<length-1; i++){
+		
+		index=i;
+		
+		for(int j=i+1; j<length; j++){
+			
+			if(arr[index]>arr[j]){				
+				index=j;
+			}
+		}
+
+		temp=arr[i];
+		arr[i]=arr[index];
+		arr[index]=temp;
+	}
+
+
+```
+
+##### Advantages of selection sort
+
+1. It gives the same time complexity regardless of arrangements of items in the array or data set
+1. Since number of operations(swapping, size – 1) are less, so its favorable to use when swapping operations are costly in system
+
+##### Disdavantages of selection sort
+
+1. The time complexity is quiet high i.e. O(n2) thus not good
+
+
+
