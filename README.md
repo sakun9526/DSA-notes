@@ -242,4 +242,54 @@ void sortArray(int arr[], int length){
 1. The time complexity is quiet high i.e. O(n2) thus not good
 
 
+<br>
+
+### Insertion sort
+
+Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in each iteration.
+
+<img src="Images/insertion sort.JPG" alt="insertion sort">
+
+``` c++
+int main(){
+	int arr[]={8, 7, 6, 5, 4, 3, 2, 1};
+	
+	int length=sizeof(arr)/sizeof(arr[0]);
+	
+	sortArray(arr, length);
+
+	return 0;
+}
+
+
+// insertion sort method
+void sortArray(int arr[], int length){
+	// insertion sort technique
+	int key=0, j=0;
+	
+	for(int i=1; i<length; i++){
+		
+		key=arr[i]; // the first element of unsorted part
+		j=i-1;
+		
+		while(j>=0 && arr[j]>key){
+			arr[j+1]=arr[j];
+			j=j-1;
+		}
+		
+		arr[j+1]=key;
+	}
+} 
+
+
+```
+##### Advantages of insertion sort
+
+1. Only O(1) space requirements
+2. For smaller number of items in array its quicker than merge sort
+
+##### Disdavantages of insertion sort
+
+1. Not so good average time complexity of O(n2)
+2. If there are large elements then it gives bad performance because of O(n^2) time complexity
 
