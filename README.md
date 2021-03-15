@@ -293,3 +293,195 @@ void sortArray(int arr[], int length){
 1. Not so good average time complexity of O(n2)
 2. If there are large elements then it gives bad performance because of O(n^2) time complexity
 
+
+### Divide and conquer algorithms
+
+Divide and conquer algorithms has 03 main steps
+
+**01. Divide**
+
+* This step involves breaking problem into smaller sub problems.
+* Sub problem should represent a part of the original problem.
+* Use recursion to divide the problem into sub problems continuously
+
+**02. Conquer**
+
+* Solves all the sub problems 
+
+**03. Combine**
+
+* After smaller sub problems are solved, this step recursively merges them until it formulates the solution for the original problem
+
+
+#### Advantages of divide and conquer algorithms
+
+1. Uses recursion instead of for loops
+
+2. Allows us to solve difficult complex problems in simple manner
+
+3. Makes efficient use of memory caches 
+
+
+<br>
+
+### Merge sort
+
+<img src="Images/merge sort.JPG" alt="merge sort">
+
+**Code**
+
+```c++
+
+#include <iostream>
+using namespace std;
+
+
+void mergeSort(int[], int, int);
+void merge(int[], int, int, int);
+
+
+int main(){
+	int arr[]={8, 7, 6, 5, 4, 3, 2, 1};
+	int length=sizeof(arr)/sizeof(arr[0]);
+	
+	
+	cout << "Unsorted Array : ";
+	for(int i=0; i<length; i++){
+		cout << arr[i] << " ";
+	}
+	cout << endl << endl;
+	
+	
+	mergeSort(arr, 0, length-1);
+	
+	
+	cout << "Sorted Array : ";
+	for(int i=0; i<length; i++){
+		cout << arr[i] << " ";
+	}
+	cout << endl << endl;
+	return 0;
+}
+
+
+// mergeSort function
+// recursively breaks the array into two halves from the middle until the entire array is broken down into single elements
+// and calls the merge function for each and every recursive step
+void mergeSort(int arr[], int l, int r){
+	// checks whether the array is completely broken down into single elements
+	if(l<r){
+		int mp=(l+r)/2; // calculates the midpoint
+		
+		
+		// breaks down the array into 2 halves
+		// first half contains elements related to indexes l to mp
+		// second half contains elements related to indexes mp+1 to r
+		mergeSort(arr, l, mp);
+		mergeSort(arr, mp+1, r);
+		
+		
+		// merges the two seperated halves while sorting them
+		merge(arr, mp, l, r);
+	}
+}
+
+
+// merge function
+// stores the two havles of the original array in two seperate temporary arrays
+// merges the 2 arrays(already sorted) while sorting the final one
+// so, the resultant merged array will be a sorted one
+void merge(int arr[], int mp, int l, int r){
+	// creates 2 temporary arrays of appropriate sizes
+	int size1=mp-l+1;
+	int size2=r-mp;
+	int tempArr1[size1];
+	int tempArr2[size2];
+	
+	
+	// assigns the two halves of the original array to the 2 temporary arrays
+	for(int i=0, j=l; i<size1; i++, j++){
+		tempArr1[i]=arr[j];
+	}
+	
+	
+	for(int i=0, j=mp+1; i<size2; i++, j++){
+		tempArr2[i]=arr[j];
+	}
+	
+	
+	// merges the two arrays while sorting
+	// the two arrays are already sorted because this function is called in every recursive step of mergeSort()
+	// So, elements are copied until all the elements of one array is completely copied
+	int i=0, j=0, k=l;
+	while(i<size1 && j<size2){
+		if(tempArr1[i]<=tempArr2[j]){
+			arr[k]=tempArr1[i];
+			i++;
+		}else{
+			arr[k]=tempArr2[j];
+			j++;
+		}
+		
+		k++;
+	}
+	
+	
+	// the remaining elements of the other array are copied to the merged array as the final step
+	while(i<size1){
+		arr[k]=tempArr1[i];
+		k++;
+		i++;
+	}
+	
+	while(j<size2){
+		arr[k]=tempArr2[j];
+		k++;
+		j++;
+	}
+}
+
+```
+**Pseudocode**
+
+``` markdown
+
+procedure mergesort( var a as array )
+   if ( n == 1 ) return a
+
+   var l1 as array = a[0] ... a[n/2]
+   var l2 as array = a[n/2+1] ... a[n]
+
+   l1 = mergesort( l1 )
+   l2 = mergesort( l2 )
+
+   return merge( l1, l2 )
+end procedure
+
+procedure merge( var a as array, var b as array )
+
+   var c as array
+   while ( a and b have elements )
+      if ( a[0] > b[0] )
+         add b[0] to the end of c
+         remove b[0] from b
+      else
+         add a[0] to the end of c
+         remove a[0] from a
+      end if
+   end while
+   
+   while ( a has elements )
+      add a[0] to the end of c
+      remove a[0] from a
+   end while
+   
+   while ( b has elements )
+      add b[0] to the end of c
+      remove b[0] from b
+   end while
+   
+   return c
+	
+end procedure
+
+```
