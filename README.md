@@ -980,8 +980,97 @@ Begin procedure addNode (node *&head, int loc)
 			current -> next = temp 
 		endif 
 	endif 
-	
+
 End procedure addNode 
+
+
+```
+
+<br>
+
+**Delete elements from front**
+
+``` markdown
+
+Begin procedure deleteFront(node *&head)
+	node *temp = head 
+	head = head -> next 
+	delete temp 
+
+End procedure deleteFront
+
+```
+
+<br>
+
+**Delete elements from end**
+
+``` markdown
+Begin procedure deleteEnd(node *&head)
+
+	node *temp = null
+	int count = 1 
+	node *current = head, *previous = null 
+
+	if(head <> null) then 
+
+	   while(current -> next <> null)
+	   	previous = current 
+	   	current = current -> next 
+	   	count ++
+	   end while
+
+	   if(count == 1) then 
+	   	temp = head 
+	   	head = null 
+	   	delete temp 
+
+	   else 
+	   	temp = current 
+	   	previous -> next = null 
+	   	delete temp 
+
+	   endif
+
+	endif
+
+End procedure deleteEnd
+
+```
+
+<br>
+
+**Delete element after particular node**
+
+```markdown
+
+Begin procedure deleteNode(node *&head, int loc)
+
+	node *temp = null 
+
+	if(loc == 0) then 
+		temp = head 
+		head = head -> next 
+		delete temp 
+	else 
+		node *current = head 
+
+		for(int i = loc , i > 1 , i--)
+			current = current -> next 
+		endfor
+
+		if(current->next->next == null) then
+			temp = current -> next 
+			current -> next = null 
+			delete temp 
+		else 
+			temp = current -> next
+			current -> next = current->next->next
+			delete temp 
+		endif
+	endif
+
+End procedure deleteNode
 
 
 ```
