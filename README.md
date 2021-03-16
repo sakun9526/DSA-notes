@@ -788,3 +788,200 @@ TC - Time complexity , SC - Space complexity
 | Merge sort        | O(n log(n))      | O(n log(n))       | O(n log(n))     | O(n)             |
 | Quick sort        | O(n<sup>2</sup>) | O(n log(n))       | O(n log(n))     | O(n)             |  
 | Heap sort         | O(n log(n))      | O(n log(n))       | O(n log(n))     | O(1)             | 
+
+<br>
+
+## Linked Lists
+
+A linked list data structure includes a series of connected nodes. Here, each node store the data and the address of the next node.
+
+<img src="Images/linked list intro.png" alt="linked list">
+
+#### Why we use Linked List in Data Structure?
+
+There are disadvantages with arrays that cause to use linked lists instead
+
+1. Fixed Size
+
+* The size of the array is fixed and needs to be pre-defined
+	* Example – int a[10]; or int a[ ] = {1, 2, 3, 4, 5}
+	* We can’t declare an array without declaring the size
+
+2. Memory wastage (Not Optimised)
+
+* If you declare an array of size 10 and just assign values to first two elements
+* The memory is allocated to all of them even though, we may not end up using them.
+
+3. Need for Contiguous Memory
+
+* Arrays need Contiguous memory, which some times is bad.
+	* Example – Consider there are only three memories of size 10, 10 and 400
+	* We need to store an array of size 15
+	* In this case, the array will use memory location is size 400 and not combine memory A and B of size 10 and 10 respectively.
+	* Thus wasting a lot of memory
+
+4. Inserting in Array is expensive
+
+* Let us say you have an array a[] = {10, 20, 40, 60, 80} and we need to add 50 in a same sorted format.
+* Then, we have to move all elements after 40 to one additional position
+* Also, same goes for deletion if we want to delete 20. Then all elements after it have to be moved to one position in the opposite direction.
+
+#### Advantages of linked lists
+
+* Insertion and Deletions are easier and efficient.
+* Efficient memory allocation i.e no need to pre-allocate memory..
+* Many complex applications can be easily carried out with linked lists.
+* During run time they grow and shrink.
+
+#### Disdavantages of linked lists
+
+* Uses more memory than arrays because of the storage used by their pointers.
+* Reversing traversing a linked list is a complicated task.
+* Linked lists only allow sequential access.
+
+<br>
+
+### Singly linked list
+
+In a Singly linked list node, it only contains the address of the next node and not the previous node, so we can only traverse in one direction only. 
+
+##### Structure of linked list
+
+``` markdown
+
+struct node
+{
+  int data;
+  struct node *next;
+};
+
+```
+<br>
+
+
+**Create linked list Pseudocode**
+
+``` markdown
+
+Begin procedure append (Node *&head)
+	
+	Node *temp = new Node
+	print "input value to append"
+	Input(temp -> val)
+	temp -> next = null
+
+	if (head == null) then
+		head = temp 
+	else
+		Node *current = head 
+
+		while(current -> next <> null)
+			current = (current -> next)
+		end while
+
+		current -> next = temp
+	end if 
+
+End procedure append
+
+
+```
+
+<br>
+
+**Insert elements at the beginning in linked list**
+
+Steps
+
+* Allocate memory for new node
+* Store data
+* Change next of new node to point to head
+* Change head to point to recently created node
+
+``` markdown
+
+Begin procedure addFront (Node *&head)
+
+	Node *temp = new Node
+	print "Input a value"
+	input (temp -> val)
+	temp -> next = null
+	temp -> next = head 
+	head = temp 
+
+End procedure addFront
+
+
+```
+
+<br>
+
+**Insert elements at the end in linked list**
+
+Steps
+
+* Allocate memory for new node
+* Store data
+* Traverse to last node
+* Change next of last node to recently created node
+
+``` markdown
+Begin procedure addEnd (Node *&head)
+
+	Node *temp = new Node 
+	print "input a value"
+	input (temp -> val)
+	temp -> next = null 
+
+	if(head == null) then
+		head = temp
+	else 
+		Node *current = head 
+
+	while(current -> next <> null)
+		current = current -> next 
+	end while
+    
+    current -> next = temp 
+    end if 
+
+End procedure addEnd
+
+```
+
+<br>
+
+**Insert elements after particular node in linked list**
+
+``` markdown
+
+Begin procedure addNode (node *&head, int loc)
+
+	node *temp = new node
+	print "input a value"
+	input (temp -> val)
+	temp -> next = null 
+
+	if(loc == 0) then 
+		temp -> next = head 
+		head = temp 
+
+	else 
+		node *current = head 
+
+		for(int i=loc, i>1, i--)
+			current = current -> next 
+		endfor
+
+		if(current -> next == null) then
+			current -> next = temp 
+		else 
+			temp -> next = current -> next 
+			current -> next = temp 
+		endif 
+	endif 
+	
+End procedure addNode 
+
+
+```
