@@ -1558,3 +1558,460 @@ void deleteStack(){
 
 
 ```
+
+<br>
+
+## Queue 
+
+A queue is a useful data structure in programming. It is similar to the ticket queue outside a cinema hall, where the first person entering the queue is the first person who gets the ticket. Queue follows the First In First Out (FIFO) rule - the item that goes in first is the item that comes out first.
+
+<img src="Images/queue intro.png" alt="queue">
+
+#### Queue operations
+
+* **Enqueue**: Adding a new item to the Queue Data Structure, in other words, enqueuing new item to Stack DS.
+	* If the Queue is full, then it is said to be in an overflow condition
+
+* **Dequeue**: Removing an item from the Queue, i.e. dequeuing an item out.
+	* If a Queue is empty then it is said to be in an underflow condition
+
+* **IsEmpty**: This returns True If the Queue is empty else returns False
+
+* **IsFull**: This returns True if the Queue is full else returns false
+
+* **peek**: get the data of front element without removing it 
+
+<img src="Images/queue operations.png" alt="queue operations">
+
+<br>
+
+### Queue operations using arrays
+
+**Peek operation**
+
+``` markdown
+
+begin procedure peek
+   return queue[front]
+end procedure
+
+```
+
+**isFull()**
+
+```markdown
+
+begin procedure isfull
+
+   if rear equals to MAXSIZE
+      return true
+   else
+      return false
+   endif
+   
+end procedure
+
+```
+
+**isEmpty()**
+
+```markdown
+
+begin procedure isempty
+
+   if front is less than MIN  OR front is greater than rear
+      return true
+   else
+      return false
+   endif
+   
+end procedure
+
+```
+
+<br>
+
+**Enqueue**
+
+```markdown
+
+Begin procedure enqueue(data)      
+   
+   if queue is full
+      return overflow
+   endif
+   
+   rear ← rear + 1
+   queue[rear] ← data
+   return true
+   
+end procedure
+
+```
+
+**Dequeue**
+
+```markdown
+
+Begin procedure dequeue
+   
+   if queue is empty
+      return underflow
+   end if
+
+   data = queue[front]
+   front ← front + 1
+   return true
+
+end procedure
+
+```
+
+<br>
+<hr>
+
+**Queue operations using arrays in C++**
+
+```C++
+#include <iostream>
+using namespace std;
+
+
+// global variables and arrays are declared so that they are available for all the functions
+int queue[5];
+int front=-1;
+int rear=-1;
+const int MAXSIZE=5;
+
+
+// function prototype statements
+int peek();
+bool isFull();
+bool isEmpty();
+void enqueue(int);
+void dequeue();
+void displayQueue();
+int getCount();
+
+// uses the queue data structure
+int main(){
+	int choice=-1, data;
+	bool control=1;
+	
+	while(true){
+		cout << "Select an Option" << endl;
+		cout << "1. Enter data element" << endl;
+		cout << "2. Remove data element" << endl;
+		cout << "3. Display all data elements of the queue" << endl;
+		cout << "4. Display first data element of the queue" << endl;
+		cout << "5. Display number of data elements of the queue" << endl;
+		cout << "6. Exit" << endl;
+		
+		cout << "Enter your choice : ";
+		cin >> choice;
+		
+		switch(choice){
+			case 1 :
+				cout << "Input Data : ";
+				cin >> data;
+				enqueue(data);
+				break;
+			case 2 :
+				dequeue();
+				break;
+			case 3 :
+				displayQueue();
+				break;
+			case 4 : 
+				cout << peek() << endl;
+				break;
+			case 5 :
+				cout << getCount() << endl;
+				break;
+			case 6 : 
+				control=0;
+				break;
+			default : 
+				cout << "Invalid choice, please enter again!" << endl;
+				break;
+		}
+		
+		if(control==0){
+			break;
+		}
+		
+		cout << endl << endl;
+	}
+	
+	return 0;
+}
+
+
+// returns the front element of the queue
+int peek(){
+	return queue[front];
+}
+
+
+// checks whether the queue is full
+// this is for a normal queue, so only checks whether a data element is available in the final index of the array
+// does not check whether front indexes of the array are vacant
+bool isFull(){
+	if(rear==MAXSIZE-1){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// checks whether the queue is empty
+bool isEmpty(){
+	// front<0 - queue is not yet initialized
+	// front>rear - all data elements was removed from an already initialized queue
+	if(front<0 || front>rear){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// adds elements to the queue from the end of the queue
+void enqueue(int data){
+	if(!isFull()){
+		if(front==-1){
+			front=0;
+		}
+		rear+=1;
+		queue[rear]=data;
+	}else{
+		cout << "Error! Queue is Full" << endl;
+	}
+}
+
+
+// removes elements from the front of the queue
+void dequeue(){
+	int data;
+	
+	if(!isEmpty()){
+		int data=queue[front];
+		front=front+1;
+		cout << "Data element removed was " << data << endl;
+	}else{
+		cout << "Error! Queue is empty" << endl;
+	}
+}
+
+
+// displays all data elements of the queue starting from front to the rear
+void displayQueue(){
+	if(!isEmpty()){
+		for(int i=front; i<=rear; i++){
+			cout << queue[i] << " ";
+		}
+	}else{
+		cout << "Error! Queue is empty" << endl;
+	}
+}
+
+
+// returns the count of data elements of the queue
+int getCount(){
+	int count=0;
+	if(!isEmpty()){
+		count=rear-front+1;	
+	}
+	return count;
+}
+
+
+/*
+Important
+=========
+* This queue can only be used once(not reusable).
+	i.e. - only till the rear becomes equal to (MAXSIZE-1)
+* The reason for this is, there is no mechanism in the code to start filling data elements from front indexes of the array if they are empty
+* There are 2 ways to resolve this issue and make the queue reusable,
+	Option 1 - Shifting all data elements of the queue backwards by one index starting from index=1 to index=rear using a loop for each call of dequeue()
+	Option 2 - Using a Circular queue
+* Note that this error is only present when using arrays to implement a Queue
+* This issues is not present when using linked list to implement a Queue because in linked lists Nodes(data elements) are allocated dynamically
+* So, the above mentioned 2 options are not considered under Implementation of a Queue using Linked lists.
+
+*/
+
+
+```
+
+<br>
+
+**Queue operations using linked lists in C++**
+
+``` C++
+#include <iostream>
+using namespace std;
+
+
+// definition of Node struct globally
+struct Node{
+	int val;
+	Node *next;	
+};
+
+
+// declaration of the queue
+Node *front=NULL, *rear=NULL;
+
+
+// function prototype statements
+int peek();
+bool isFull();
+bool isEmpty();
+void enqueue(int);
+void dequeue();
+void displayQueue();
+int getCount();
+
+// uses the queue data structure
+int main(){
+	int choice=-1, data;
+	bool control=1;
+	
+	while(true){
+		cout << "Select an Option" << endl;
+		cout << "1. Enter data element" << endl;
+		cout << "2. Remove data element" << endl;
+		cout << "3. Display all data elements of the queue" << endl;
+		cout << "4. Display first data element of the queue" << endl;
+		cout << "5. Display number of data elements of the queue" << endl;
+		cout << "6. Exit" << endl;
+		
+		cout << "Enter your choice : ";
+		cin >> choice;
+		
+		switch(choice){
+			case 1 :
+				cout << "Input Data : ";
+				cin >> data;
+				enqueue(data);
+				break;
+			case 2 :
+				dequeue();
+				break;
+			case 3 :
+				displayQueue();
+				break;
+			case 4 : 
+				cout << peek() << endl;
+				break;
+			case 5 :
+				cout << getCount() << endl;
+				break;
+			case 6 : 
+				control=0;
+				break;
+			default : 
+				cout << "Invalid choice, please enter again!" << endl;
+				break;
+		}
+		
+		if(control==0){
+			break;
+		}
+		
+		cout << endl << endl;
+	}
+	
+	return 0;
+}
+
+
+// returns the front element of the queue
+int peek(){
+	if(!(isEmpty())){
+		return front->val;
+	}
+}
+
+
+// checks whether the queue is empty
+bool isEmpty(){
+	if(front==NULL){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// adds elements to the queue from the end of the queue
+void enqueue(int data){
+	Node *temp=new Node;
+	temp->val=data;
+	temp->next=NULL;
+	
+	if(front==NULL){ 
+		front=temp;
+	}else{
+		Node *current=front;
+		while(current->next!=NULL){
+			current=current->next;
+		}
+		current->next=temp;
+	}
+	rear=temp;
+}
+
+
+// removes elements from the front of the queue
+void dequeue(){
+	int data;
+	
+	if(!isEmpty()){
+		if(getCount()==1){
+			rear=NULL;
+		}
+		
+		data=front->val;
+		Node *temp=front;
+		front=front->next;
+		delete temp;
+		
+		cout << "Data element removed was " << data << endl;
+	}else{
+		cout << "Error! Queue is empty" << endl;
+	}
+}
+
+
+// displays all data elements of the queue starting from front to the rear
+void displayQueue(){
+	if(!isEmpty()){
+		Node *current=front;
+		while(current!=NULL){
+			cout << current->val << " ";
+			current=current->next; 
+		}
+	}else{
+		cout << "Error! Queue is empty" << endl;
+	}
+}
+
+
+// returns the count of data elements of the queue
+int getCount(){
+	int count=0;
+	if(!isEmpty()){
+		Node *current=front;
+		while(current!=NULL){
+			count++;
+			current=current->next;
+		}
+	}
+	return count;
+}
+
+
+```
