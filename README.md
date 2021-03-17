@@ -1117,3 +1117,61 @@ Stack is one of the basic linear Data structure, that we use for storing our dat
 
 * Stack memory is very limited.
 * Random access is not possible.
+
+
+<br>
+
+**Initialize stack using array**
+
+``` markdown
+
+structure stack:
+    maxsize : integer
+    top : integer
+    items : array of item 
+
+Begin procedure initialize(stk : stack, size : integer):
+
+    stk.items ← new array of size items, initially empty
+    stk.maxsize ← size
+    stk.top ← 0
+
+End procedure initialize
+
+
+```
+<br>
+
+**Push operation using array**
+
+``` markdown
+
+Begin procedure push(stk : stack, x : item):
+    if stk.top = stk.maxsize:
+        report overflow error
+    else:
+        stk.items[stk.top] ← x
+        stk.top ← stk.top + 1
+    endif
+
+End procedure push
+
+```
+<br>
+
+**Pop operation using array**
+
+```markdown
+
+Begin procedure pop(stk : stack):
+    if stk.top = 0:
+        report underflow error    
+    else:    
+        stk.top ← stk.top − 1
+        r ← stk.items[stk.top]
+        return r   
+    endif
+End procedure pop
+
+```
+
