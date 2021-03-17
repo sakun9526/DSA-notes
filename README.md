@@ -2015,3 +2015,202 @@ int getCount(){
 
 
 ```
+
+<br>
+
+### Circular queue
+
+<img src="Images/circular queue intro.png" alt="circular queue">
+
+<br>
+
+```C++
+#include <iostream>
+using namespace std;
+
+
+// global variables and arrays are declared so that they are available for all the functions
+int queue[5];
+int front=-1;
+int rear=-1;
+const int MAXSIZE=5;
+
+
+// function prototype statements
+int peek();
+bool isFull();
+bool isEmpty();
+void enqueue(int);
+void dequeue();
+void displayQueue();
+int getCount();
+
+// uses the queue data structure
+int main(){
+	int choice=-1, data;
+	bool control=1;
+	
+	while(true){
+		cout << "Select an Option" << endl;
+		cout << "1. Enter data element" << endl;
+		cout << "2. Remove data element" << endl;
+		cout << "3. Display all data elements of the queue" << endl;
+		cout << "4. Display first data element of the queue" << endl;
+		cout << "5. Display number of data elements of the queue" << endl;
+		cout << "6. Exit" << endl;
+		
+		cout << "Enter your choice : ";
+		cin >> choice;
+		
+		switch(choice){
+			case 1 :
+				cout << "Input Data : ";
+				cin >> data;
+				enqueue(data);
+				break;
+			case 2 :
+				dequeue();
+				break;
+			case 3 :
+				displayQueue();
+				break;
+			case 4 : 
+				cout << peek() << endl;
+				break;
+			case 5 :
+				cout << getCount() << endl;
+				break;
+			case 6 : 
+				control=0;
+				break;
+			default : 
+				cout << "Invalid choice, please enter again!" << endl;
+				break;
+		}
+		
+		if(control==0){
+			break;
+		}
+		
+		cout << endl << endl;
+	}
+	
+	return 0;
+}
+
+
+// returns the front element of the queue
+int peek(){
+	if(!isEmpty()){
+		return queue[front];	
+	}
+}
+
+
+// checks whether the queue is full
+bool isFull(){
+	if((front==0 && rear==MAXSIZE-1) || (front==(rear+1))){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// checks whether the queue is empty
+bool isEmpty(){
+	if(front<0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// adds elements to the queue from the end of the queue
+void enqueue(int data){
+	if(!isFull()){
+		if(front==-1 && rear==-1){
+			front=0;
+			rear=0;
+		}else if(rear==MAXSIZE-1){
+			rear=0;
+		}else{
+			rear+=1;
+		}
+		queue[rear]=data;
+	}else{
+		cout << "Error! Circular Queue is Full" << endl;
+	}
+}
+
+
+// removes elements from the front of the queue
+void dequeue(){
+	int data;
+	
+	if(!isEmpty()){
+		int data=queue[front];
+		if(front==rear){
+			front=-1;
+			rear=-1;
+		}else if(front==MAXSIZE-1){
+			front=0;
+		}else{
+			front+=1;
+		}
+
+		cout << "Data element removed was " << data << endl;
+	}else{
+		cout << "Error! Circular Queue is empty" << endl;
+	}
+}
+
+
+// displays all data elements of the queue starting from front to the rear
+void displayQueue(){
+	if(!isEmpty()){
+		if(front<=rear){
+			for(int i=front; i<=rear; i++){
+				cout << queue[i] << " ";
+			}	
+		}else{
+			for(int i=front; i<MAXSIZE; i++){
+				cout << queue[i] << " ";
+			}
+			
+			for(int i=0; i<=rear; i++){
+				cout << queue[i] << " ";
+			}
+		}
+		
+	}else{
+		cout << "Error! Circular Queue is empty" << endl;
+	}
+}
+
+
+// returns the count of data elements of the queue
+int getCount(){
+	int count=0;
+	if(!isEmpty()){
+		if(front<=rear){
+			count=rear-front+1;
+		}else{
+			count=(MAXSIZE-front)+(rear+1);
+		}
+	}
+	
+	return count;
+}
+
+
+
+```
+
+<br>
+
+### Priority queue
+
+ Priority Queue in C++ programming is a advanced data structure, which is one step ahead of a normal queue. In priority queue we work with the data depending upon the priority of the data. Like, if we want to delete an element from the queue, the data with the highest priority will be deleted first, in the similar way if we are inserting some data in the queue, it will be arranged in the queue depending upon its priority
+
