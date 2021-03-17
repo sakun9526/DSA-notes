@@ -1074,3 +1074,46 @@ End procedure deleteNode
 
 
 ```
+
+<br>
+
+### Doubly linked list
+
+<img src="Images/doubly linked list intro.png" alt="circular">
+
+<br>
+
+### Circular linked list
+
+<img src="Images/circular linked list intro.png" alt="circular">
+
+<br>
+
+## Stack 
+
+Stack is one of the basic linear Data structure, that we use for storing our data. Data in a stack is stored in a serialized manner. One important thing about using a Stack is that the data first entered in the stack will be at the last of the stack. This is one of the reason why we also called Stack a LIFO Data Structure, i.e; Last in First Out.
+
+<img src="Images/stack intro.png" alt="stack">
+
+<br>
+
+#### Basic terminology of stack 
+
+* Top – This refers to the topmost element of the stack, or in other words the element last entered in the stack.
+* Push () – This is one of the operation that we can perform on stack, for inserting data in this data structure.
+* Pop () – This operation deals with deleting the data from the stack. It deletes the top-most data from the stack.
+* Peek () – This operation helps us in looking at the topmost element of the data without removing it from the stack.
+
+
+#### Advantages of stack 
+
+* Manages the data in a Last In First Out(LIFO) method which is not possible with Linked list and array.
+* A stack is used when a variable is not used outside that function.
+* It allows you to control how memory is allocated and deallocated.
+* Not easily corrupted
+* Variables cannot be resized.
+
+#### Disdavantages of stack 
+
+* Stack memory is very limited.
+* Random access is not possible.
