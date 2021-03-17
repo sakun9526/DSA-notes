@@ -1234,3 +1234,327 @@ Begin procedure pop(stk : stack):
 
 End procedure pop 
 ```
+<br>
+<hr>
+
+**Stack implementations using arrays in C++**
+
+``` C++
+
+#include <iostream>
+using namespace std;
+
+
+// variables and arrays are declared globally so that they are available for all the functions
+int stack[5];
+int top=-1; // initial value of top is -1
+const int MAXSIZE=5;
+
+
+// function prototypes
+int peek();
+bool isFull();
+bool isEmpty();
+void push(int);
+void pop();
+void displayStack();
+int getCount();
+
+
+// uses the stack
+int main(){
+	int choice=-1, data;
+	bool control=1;
+	
+	while(true){
+		cout << "Select an Option" << endl;
+		cout << "1. Enter data element" << endl;
+		cout << "2. Remove data element" << endl;
+		cout << "3. Display all data elements of the stack" << endl;
+		cout << "4. Display final data element of the stack" << endl;
+		cout << "5. Display number of data elements of the stack" << endl;
+		cout << "6. Exit" << endl;
+		
+		cout << "Enter your choice : ";
+		cin >> choice;
+		
+		switch(choice){
+			case 1 :
+				cout << "Input Data : ";
+				cin >> data;
+				push(data);
+				break;
+			case 2 :
+				pop();
+				break;
+			case 3 :
+				displayStack();
+				break;
+			case 4 : 
+				cout << peek() << endl;
+				break;
+			case 5 :
+				cout << getCount() << endl;
+				break;
+			case 6 : 
+				control=0;
+				break;
+			default : 
+				cout << "Invalid choice, please enter again!" << endl;
+				break;
+		}
+		
+		if(control==0){
+			break;
+		}
+		
+		cout << endl << endl;
+	}
+}
+
+
+// returns the top data element of the stack
+int peek(){
+	return stack[top];	
+}
+
+
+// checks whether the stack is full or not
+// if full returns true
+// if not full retuns false
+bool isFull(){
+	if(top==MAXSIZE-1){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// checks whether the stack is empty or not
+// if empty returns true
+// if not empty returns false
+bool isEmpty(){
+	if(top==-1){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// inserts new data element to the top of stack (at the end of the array)
+void push(int data){
+	if(!isFull()){
+		top+=1;
+		stack[top]=data;
+	}else{
+		cout << "Error! Stack is full" << endl;
+	}
+}
+
+
+// removes the top data element from the stack (element at the end of the array)
+// and displays that data element
+void pop(){
+	int data;
+	if(!isEmpty()){
+		data=stack[top];
+		top-=1;
+		cout << "Data element removed was " << data << endl;
+	}else{
+		cout << "Error! Stack has no elements" << endl;
+	}
+}
+
+
+// displays all the data elements of the stack starting from the top
+void displayStack(){
+	if(!isEmpty()){
+		for(int i=top; i>=0; i--){
+			cout << stack[i] << " ";
+		}
+	}else{
+		cout << "Error! Stack has no elements" << endl;
+	}
+}
+
+
+// returns the count of data elements in the stack
+int getCount(){
+	return top+1;
+}
+
+
+
+```
+
+<br>
+
+**Stack implementations using linked lists in C++**
+
+```C++
+
+#include <iostream>
+using namespace std;
+
+
+// definition of Node of the Linked list
+struct Node{
+	int val;
+	Node *next;
+};
+
+
+// declaration of the stack globally
+Node *head=NULL;
+
+
+// function prototypes
+int peek();
+bool isEmpty();
+void push(int);
+void pop();
+void displayStack();
+int getCount();
+void deleteStack();
+
+
+// uses the stack
+int main(){
+	int choice=-1, data;
+	bool control=1;
+	
+	while(true){
+		cout << "Select an Option" << endl;
+		cout << "1. Enter data element" << endl;
+		cout << "2. Remove data element" << endl;
+		cout << "3. Display all data elements of the stack" << endl;
+		cout << "4. Display final data element of the stack" << endl;
+		cout << "5. Display number of data elements of the stack" << endl;
+		cout << "6. Exit" << endl;
+		
+		cout << "Enter your choice : ";
+		cin >> choice;
+		
+		switch(choice){
+			case 1 :
+				cout << "Input Data : ";
+				cin >> data;
+				push(data);
+				break;
+			case 2 :
+				pop();
+				break;
+			case 3 :
+				displayStack();
+				break;
+			case 4 : 
+				cout << peek() << endl;
+				break;
+			case 5 :
+				cout << getCount() << endl;
+				break;
+			case 6 : 
+				control=0;
+				break;
+			default : 
+				cout << "Invalid choice, please enter again!" << endl;
+				break;
+		}
+		
+		if(control==0){
+			deleteStack();
+			break;
+		}
+		
+		cout << endl << endl;
+	}
+}
+
+
+// returns the top data element of the stack
+int peek(){
+	if(!isEmpty()){
+		return head->val;	
+	}
+}
+
+
+// checks whether the stack is empty or not
+// if empty returns true
+// if not empty returns false
+bool isEmpty(){
+	if(head==NULL){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+// inserts new data element to the top of stack (at the beginning of the linked list)
+void push(int data){
+	Node *temp=new Node;
+	temp->val=data;
+	temp->next=NULL;
+	
+	temp->next=head;
+	head=temp;
+}
+
+
+// removes the top data element from the stack (element at the beginning of the linked list)
+// and displays that data element
+void pop(){
+	int data;
+	if(!isEmpty()){
+		Node *temp=head;
+		data=head->val;
+		head=head->next;
+		delete temp;
+		cout << "Data element removed was " << data << endl;
+	}else{
+		cout << "Error! Stack has no data elements" << endl;
+	}
+}
+
+
+// displays all the data elements of the stack starting from the top (beginning of the linked list)
+void displayStack(){
+	if(!isEmpty()){
+		Node *current=head;
+		while(current!=NULL){
+			cout << current->val << " ";
+			current=current->next;
+		}
+	}else{
+		cout << "Error! Stack has no data elements" << endl;
+	}
+}
+
+
+// returns the count of data elements in the stack
+int getCount(){
+	int count=0;
+	Node *current=head;
+	while(current!=NULL){
+		count++;
+		current=current->next;
+	}
+	return count;
+}
+
+
+// deletes the entire stack (used when program execution is over to deallocate dynamically allocated memory)
+void deleteStack(){
+	Node *temp=NULL; // stores the node until it is deleted from the free store
+	while(head!=NULL){
+		temp=head;
+		head=head->next;
+		delete temp;
+	}
+}
+
+
+```
