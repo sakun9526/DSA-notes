@@ -791,6 +791,30 @@ TC - Time complexity , SC - Space complexity
 
 <br>
 
+| Linked list       | TC - Worst case  | TC - Average Case | 
+| ----------------- | ---------------- | ----------------- |
+| insert            | O(1)             | O(1)              |
+| deletion          | O(1)             | O(1)              |
+| search            | O(n)             | O(n)              |
+
+<br>
+
+| Stack             | TC - Worst case  | TC - Average Case |
+| ----------------- | ---------------- | ----------------- |
+| insert            | O(1)             | O(1)              |
+| deletion          | O(1)             | O(1)              |
+| search            | O(n)             | O(n)              |
+
+<br>
+
+| Queue             | TC - Worst case  | TC - Average Case |
+| ----------------- | ---------------- | ----------------- |
+| insert            | O(1)             | O(1)              |
+| deletion          | O(1)             | O(1)              |
+| search            | O(n)             | O(n)              |
+
+<br>
+
 ## Linked Lists
 
 A linked list data structure includes a series of connected nodes. Here, each node store the data and the address of the next node.
