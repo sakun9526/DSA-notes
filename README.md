@@ -1175,3 +1175,62 @@ End procedure pop
 
 ```
 
+<br>
+<hr>
+
+**Initialize using linked list**
+
+``` markdown
+
+structure frame:
+    data : item
+    next : frame or nil
+
+structure stack:
+    head : frame or nil
+    size : integer
+
+Begin procedure initialize(stk : stack):
+    stk.head ← nil
+    stk.size ← 0
+End procedure initialize
+
+```
+
+<br>
+
+**Push operation using linked list**
+
+``` markdown
+
+Begin procedure push(stk : stack, x : item):
+    
+    newhead ← new frame
+    newhead.data ← x
+    newhead.next ← stk.head
+    stk.head ← newhead
+    stk.size ← stk.size + 1
+
+End procedure push
+
+```
+
+<br>
+
+**Pop operation using linked list**
+
+```markdown
+
+Begin procedure pop(stk : stack):
+    
+    if stk.head = nil:
+        report underflow error
+    else 
+	    r ← stk.head.data
+	    stk.head ← stk.head.next
+	    stk.size ← stk.size - 1
+	    return r
+	endif
+
+End procedure pop 
+```
