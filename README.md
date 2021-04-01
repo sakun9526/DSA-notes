@@ -194,7 +194,7 @@ int main(){
 
 Selection sort is an algorithm that selects the smallest element from an unsorted list in each iteration and places that element at the beginning of the unsorted list.
 
-<img src="Images/selection sort.JPG" alt="selection sort">
+<img src="Images/selection sort gif.gif" alt="selection sort">
 
 ```c++
 int main(){
@@ -213,10 +213,13 @@ void sortArray(int arr[], int length){
 	int index, temp;
 	// index - index of temporary minumum value
 	// temp - temp variable used for swapping
+
+	//outer loop - passes
 	for(int i=0; i<length-1; i++){
 		
 		index=i;
 		
+		//inner loop - find the min element of the unsorted array and do the swapping
 		for(int j=i+1; j<length; j++){
 			
 			if(arr[index]>arr[j]){				
@@ -228,9 +231,13 @@ void sortArray(int arr[], int length){
 		arr[i]=arr[index];
 		arr[index]=temp;
 	}
-
+}
 
 ```
+
+###### Selection sort folow chart
+
+<img src="Images/selection sort flow chart.jpg" alt="flowchart">
 
 ##### Advantages of selection sort
 
