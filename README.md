@@ -177,6 +177,10 @@ int main(){
 
 ```
 
+###### Bubble sort flowchart 
+
+<img src="Images/bubble sort flowchart.jpg" alt="bubblesort flowchart">
+
 ##### Advantages of bubble sort
 
 1. Requires less memory then other sorting techniques.
