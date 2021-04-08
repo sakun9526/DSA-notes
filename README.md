@@ -260,6 +260,7 @@ void sortArray(int arr[], int length){
 Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in each iteration.
 
 <img src="Images/insertion sort.JPG" alt="insertion sort">
+<img src="Images/insertion sort gif.gif" alt="insertion sort gif">
 
 ``` c++
 int main(){
