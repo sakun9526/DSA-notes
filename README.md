@@ -595,33 +595,67 @@ void swap(int *num1, int *num2){
 
 **Pseudocode**
 
+Partition method
+
 ``` markdown
 
-function partitionFunc(left, right, pivot)
-   leftPointer = left
-   rightPointer = right - 1
+/**
+* The function selects the last element as pivot element, places that pivot element correctly in the array in such a way
+* that all the elements to the left of the pivot are lesser than the pivot and
+* all the elements to the right of pivot are greater than it.
+* @Parameters: array, starting index and ending index
+* @Returns: index of pivot element after placing it correctly in sorted array
+*/
 
-   while True do
-      while A[++leftPointer] < pivot do
-         //do-nothing            
-      end while
-		
-      while rightPointer > 0 && A[--rightPointer] > pivot do
-         //do-nothing         
-      end while
-		
-      if leftPointer >= rightPointer
-         break
-      else                
-         swap leftPointer,rightPointer
-      end if
-		
-   end while 
-	
-   swap leftPointer,right
-   return leftPointer
-	
-end function
+
+
+Function partition (arr[], low, high)
+
+    // pivot - Element at right most position
+    pivot = arr[high]; 
+     // Index of smaller element 
+    i = (low - 1); 
+
+    For (j = low; j <= high-1; j++)
+    
+        // If current element is smaller than the pivot, swap the element with pivot
+        if (arr[j] < pivot)
+
+            i++;    // increment index of smaller element
+            swap(arr[i], arr[j]);
+        End if
+    End For
+
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+
+End Function
+
+```
+Quick sort
+
+``` markdown
+
+/**
+* The main function that implements quick sort.
+* @Parameters: array, starting index and ending index
+*/
+
+
+Function quickSort(arr[], low, high)
+
+    if (low < high)
+    
+        // pivot_index is partitioning index, arr[pivot_index] is now at correct place in sorted array
+        pivot_index = partition(arr, low, high);
+
+        quickSort(arr, low, pivot_index - 1);  // Before pivot_index
+        quickSort(arr, pivot_index + 1, high); // After pivot_index
+        
+    End if
+
+End Function
+
 
 ```
 
