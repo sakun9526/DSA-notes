@@ -785,6 +785,8 @@ end procedure
 
 Binary Search is a searching algorithm for finding an element's position in a sorted array.
 
+<img src="Images/binay search gif.gif" alt="binary search">
+
 #### Iteration method
 
 ``` markdown
